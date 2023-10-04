@@ -10,7 +10,7 @@ export function Navigation (props) {
     const Items = NavItems.map( (item) => {
         return (
             <Nav.Item>
-                <Nav.Link>{item.name}</Nav.Link>
+                <Nav.Link as={NavLink} to={item.goto}>{item.name}</Nav.Link>
             </Nav.Item>
         )
     })
