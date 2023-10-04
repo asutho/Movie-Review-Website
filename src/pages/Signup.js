@@ -67,7 +67,7 @@ export function Signup ( props ) {
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                             type="password"
-                            placeholder="Enter password"
+                            placeholder="Create a password"
                             onChange={ (evt) => setPassword(evt.target.value) }
                             value={password}
                             />
