@@ -1,7 +1,8 @@
 import { firebaseConfig } from './config/Config';
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from 'react';
+
 
 import './App.css';
 import { Test } from './components/Test';
@@ -17,7 +18,7 @@ import { Routes, Route } from 'react-router-dom'
 
 //contexts
 import { NavContext } from './contexts/NavContext';
-import { FBAuthContext } from './contexts/FBAuthContect';
+import { FBAuthContext } from './contexts/FBAuthContext';
 
 const FirebaseApp = initializeApp(firebaseConfig)
 const FirebaseAuth = getAuth( FirebaseApp )
@@ -42,6 +43,17 @@ const AuthNavRoutes = [
 function App() {
   const [ navItems, setNavItems ] = useState( NavRoutes )
   const [ auth, setAuth ] = useState(null)
+
+  onAuthStateChanged( FirebaseAuth, (user) => {
+    if(user) {
+      setAuth(user)
+      setNavItems (AuthNavRoutes)
+    }
+    else {
+      setAuth(null)
+      setNavItems (NavRoutes)
+    }
+  })
 
   return (
     <div className="App">
