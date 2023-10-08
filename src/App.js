@@ -21,6 +21,7 @@ import { Routes, Route } from 'react-router-dom'
 //contexts
 import { NavContext } from './contexts/NavContext';
 import { FBAuthContext } from './contexts/FBAuthContext';
+import { FBDbContext } from './contexts/FBDbContext'
 
 const FirebaseApp = initializeApp(firebaseConfig)
 const FirebaseAuth = getAuth( FirebaseApp )
@@ -65,6 +66,7 @@ function App() {
       </NavContext.Provider>
       
       <FBAuthContext.Provider value={FirebaseAuth}>
+      <FBDbContext.Provider value={FirebaseDB}>
         <Routes>
           <Route path="/" element={ <Home/> } />
           <Route path="/about" element={ <About/> } />
@@ -73,6 +75,7 @@ function App() {
           <Route path="/signup" element={ <Signup/> } /> 
           <Route path="/signout" element={ <SignOut/> } />       
         </Routes>
+      </FBDbContext.Provider>
       </FBAuthContext.Provider>
     </div>
   );
