@@ -5,11 +5,13 @@ import Card from 'react-bootstrap/Card';
 
 import { useContext, useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { ref } from 'firebase/storage'
+import { ref, getDownloadURL } from 'firebase/storage'
 
 //contexts
 import { FBDbContext } from '../contexts/FBDbContext';
 import { FBStorageContext } from '../contexts/FBStorageContext'
+
+import '../Styles/Home.css'
 
 export function Home () {
     const[ data, setData ] = useState([])
@@ -18,12 +20,12 @@ export function Home () {
     const FBStorage = useContext(FBStorageContext)
 
     const getData = async () => {
-        //get darta from Firebase collections called 'Books'
+        //get data from Firebase collections called 'Books'
         const querySnapshot = await getDocs(collection(FBDb, "Books"))
         //an arrary to store all of the books from Firebase
         let books = []
         querySnapshot.forEach( (doc) => {
-            let book = []
+            let book = doc.data()
             book.id = doc.id
             //add the book to the array 
             books.push(book)
@@ -37,13 +39,25 @@ export function Home () {
         }
     })
 
+    const Image = ( props ) => {
+        const [imgPath,setImgPath] = useState()
+        const imgRef = ref( FBStorage, `Book_cover/${ props.path }`)
+        getDownloadURL( imgRef ).then( (url) => setImgPath(url) )
+
+        return(
+            <Card.Img variant="top" src={imgPath} className="card-image" />
+        )
+    }
+
     const Columns = data.map( (book, key) => {
         return(
-            <Col md="4" key={key}>
-                <Card>
+            <Col md="3" key={key} className='my-3'>
+                <Card className='book-card'>
+                    <Image path={book.Cover}/>
                     <Card.Body>
-                        <Card.Title>{book.title}</Card.Title>
+                        <Card.Title>{book.Title}</Card.Title>
                     </Card.Body>
+                    <a href={"/detail/"+book.id} className='card-link'></a>
                 </Card>
             </Col>
         )
