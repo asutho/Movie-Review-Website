@@ -1,6 +1,8 @@
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import ReactStars from "react-rating-stars-component"
+import React from "react";
 
 export function ReviewForm(props) {
     const[ stars, setStars ] = useState(5)
@@ -10,7 +12,8 @@ export function ReviewForm(props) {
         const data = new FormData(event.target)
         const reviewTitle = data.get("title")
         const reviewBody = data.get("body")
-        props.handler({title: reviewTitle, content: reviewBody})
+        const reviewStars = data.get("stars")
+        props.handler({title: reviewTitle, content: reviewBody, stars: reviewStars})
     }
     if( props.user) {
     return(
