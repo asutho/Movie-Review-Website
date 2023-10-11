@@ -18,7 +18,7 @@ export function Signup ( props ) {
     const [ validPassword, setValidPassword] = useState(false)
     const [ username, setUsername ] = useState("")
     const [ validUsername, setValidUsername] = useState(false)
-    const [userNameFeedback, setUserNameFeedback] = useState
+    const [ usernameFeeback, setUsernameFeedback] = useState()
 
     const FBAuth = useContext( FBAuthContext )
     const FBDb = useContext( FBDbContext)
@@ -34,13 +34,13 @@ export function Signup ( props ) {
         if(docSnap.exists()) {
             //user already exists
             //console.log("exists")
-            setUserNameFeedback("Username is already taken")
+            setUsernameFeedback("Username is already taken")
             setValidUsername(false)
         }
         else {
             //user does not exist
             //console.log("doesn't exist")
-            setUserNameFeedback(null)
+            setUsernameFeedback("Username is available")
             setValidUsername(true)
         }
     }
@@ -126,9 +126,8 @@ export function Signup ( props ) {
                             value={username}
                             isValid={validUsername}
                             />
-                            <div>{userNameFeedback}</div>
-                            <Form.Control.Feedback>Looks Good</Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">{userNameFeedback}</Form.Control.Feedback>
+                            <Form.Control.Feedback>Looks good</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{usernameFeeback}</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Email Address</Form.Label>
