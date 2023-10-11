@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 import { ReviewForm } from '../components/ReviewForm';
 
 import { useParams } from 'react-router-dom';
@@ -36,7 +37,7 @@ export function Detail( props ) {
             setAuth(null)
         }
     })
-
+ 
     const getReviews = async () => {
         const path = `Books/${bookId}/reviews`
         const querySnapshot = await getDocs(collection(FBDb, path))
@@ -48,6 +49,21 @@ export function Detail( props ) {
         })
         setBookReviews(reviews)
     }
+    //reviews collection
+    const ReviewCollection = bookReviews.map((item) => {
+        return (
+            <Col md="3">
+                <Card>
+                    <Card.Title>
+                        <h5>{item.title}</h5>
+                    </Card.Title>
+                    <Card.Text>
+                        <p>{item.content}</p>
+                    </Card.Text>
+                </Card>
+            </Col>
+        )
+    })
 
     const bookRef = doc( FBDb, "Books", bookId)
     const getBook = async () => {
@@ -101,15 +117,14 @@ export function Detail( props ) {
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col md="4">
                 <ReviewForm user={auth} handler={ReviewHandler}/>
 
                 </Col>
             </Row>
             <Row>
                 <Col>
-                <ReviewForm user={auth} handler={ReviewHandler}/>
-
+                {ReviewCollection}
                 </Col>
             </Row>
         </Container>
