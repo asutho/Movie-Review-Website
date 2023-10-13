@@ -80,7 +80,7 @@ function App() {
           <Route path="/signin" element={ <Signin/> } />
           <Route path="/signup" element={ <Signup/> } /> 
           <Route path="/signout" element={ <SignOut/> } />  
-          <Route path="/detail/:bookId" element={ <Detail/> } />       
+          <Route path="/detail/:movieId" element={ <Detail/> } />       
         </Routes>
         </FBStorageContext.Provider>
       </FBDbContext.Provider>

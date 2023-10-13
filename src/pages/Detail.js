@@ -17,11 +17,11 @@ import { ref, getDownloadURL } from 'firebase/storage';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export function Detail( props ) {
-    const[ bookData, setBookData ] = useState()
+    const[ movieData, setMovieData ] = useState()
     const[ auth, setAuth ] = useState()
-    const[ bookReviews, setBookReviews ] = useState([])
+    const[ movieReviews, setMovieReviews ] = useState([])
 
-    let { bookId } = useParams()
+    let { movieId } = useParams()
 
     const FBDb = useContext(FBDbContext)
     const FBStorage = useContext(FBStorageContext)
@@ -39,7 +39,7 @@ export function Detail( props ) {
     })
  
     const getReviews = async () => {
-        const path = `Books/${bookId}/reviews`
+        const path = `Movies/${movieId}/reviews`
         const querySnapshot = await getDocs(collection(FBDb, path))
         let reviews = []
         querySnapshot.forEach( (item) => {
@@ -47,10 +47,10 @@ export function Detail( props ) {
             review.id = item.id
             reviews.push(review)
         })
-        setBookReviews(reviews)
+        setMovieReviews(reviews)
     }
     //reviews collection
-    const ReviewCollection = bookReviews.map((item) => {
+    const ReviewCollection = movieReviews.map((item) => {
         return (
             <Col md="3">
                 <Card>
@@ -66,28 +66,28 @@ export function Detail( props ) {
         )
     })
 
-    const bookRef = doc( FBDb, "Books", bookId)
-    const getBook = async () => {
-       let book = await getDoc( bookRef )
-       if( book.exists() ) {
-        setBookData( book.data() )
+    const movieRef = doc( FBDb, "Movies", movieId)
+    const getMovie = async () => {
+       let movie = await getDoc( movieRef )
+       if( movie.exists() ) {
+        setMovieData( movie.data() )
         getReviews()
        }
        else {
-        // no book exists with the ID
+        // no movie exists with the ID
        }
     }
 
     useEffect(() => {
-        if( !bookData ) {
-            getBook( bookId )
+        if( !movieData ) {
+            getMovie( movieId )
         }
     })
 
     //function to handle review submission
     const ReviewHandler = async (reviewData) => {
     //create a document inside Firestore
-    const path = `Books/${bookId}/reviews`
+    const path = `Movies/${movieId}/reviews`
     const review = await addDoc(collection(FBDb, path), reviewData)
     //when the user submits a new reivew, refresh the reviews
     getReviews()
@@ -95,7 +95,7 @@ export function Detail( props ) {
 
     const Image = ( props ) => {
         const [imgPath,setImgPath] = useState()
-        const imgRef = ref( FBStorage, `Book_cover/${ props.path }`)
+        const imgRef = ref( FBStorage, `Movie_cover/${ props.path }`)
         getDownloadURL( imgRef ).then( (url) => setImgPath(url) )
 
         return(
@@ -103,31 +103,26 @@ export function Detail( props ) {
         )
     }
 
-    if( bookData) {
+    if( movieData) {
     return(
         <Container>
             <Row className='my-3'>
-                <Col md="4">
-                <Image path ={bookData.Cover}/>
-                </Col>
-                <Col md="7">
-                    <h2>{bookData.Title}</h2>
-                    <h4>{bookData.Author}</h4>
-                    <h5>{bookData.Year}</h5>
-                    <p>{bookData.Summary}</p>
-                    <p>ISBN: {bookData.isbn10} <br/> ISBN13: {bookData.isbn13} </p>
-                    <p>Pages: {bookData.Pages}</p>
-                </Col>
-            </Row>
-            <Row className='my-3'>
                 <Col md="6">
-                <ReviewForm user={auth} handler={ReviewHandler}/>
-
+                <Image path ={movieData.Image}></Image><br/>
+                <h2>{movieData.Title}</h2>
+                    <h4>{movieData.Director}</h4>
+                    <h5>{movieData.Producer}</h5>
+                    <h5>{movieData.Genre}</h5>
+                    <h5></h5>
+                    
+                    <p>{movieData.Synopsis}</p>
+                    <p>Actor List: {movieData.Actors}</p>
+                    <a href={movieData.Link}>View the IMDB page for {movieData.Title} here</a>
                 </Col>
-            </Row>
-            <Row>
-                <Col>
-                {ReviewCollection}
+                <Col md="5" className='my-3'>
+                    <ReviewForm user={auth} handler={ReviewHandler}/>
+                    <br/>
+                    {ReviewCollection}
                 </Col>
             </Row>
         </Container>

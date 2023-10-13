@@ -20,18 +20,18 @@ export function Home () {
     const FBStorage = useContext(FBStorageContext)
 
     const getData = async () => {
-        //get data from Firebase collections called 'Books'
-        const querySnapshot = await getDocs(collection(FBDb, "Books"))
-        //an arrary to store all of the books from Firebase
-        let books = []
+        //get data from Firebase collections called 'Movies'
+        const querySnapshot = await getDocs(collection(FBDb, "Movies"))
+        //an arrary to store all of the movies from Firebase
+        let movies = []
         querySnapshot.forEach( (doc) => {
-            let book = doc.data()
-            book.id = doc.id
-            //add the book to the array 
-            books.push(book)
+            let movie = doc.data()
+            movie.id = doc.id
+            //add the movie to the array 
+            movies.push(movie)
         })
-        //set the books array as the data state
-        setData(books)
+        //set the movies array as the data state
+        setData(movies)
     }
     useEffect( () => {
         if( data.length === 0 ) {
@@ -41,7 +41,7 @@ export function Home () {
 
     const Image = ( props ) => {
         const [imgPath,setImgPath] = useState()
-        const imgRef = ref( FBStorage, `Book_cover/${ props.path }`)
+        const imgRef = ref( FBStorage, `Movie_cover/${ props.path }`)
         getDownloadURL( imgRef ).then( (url) => setImgPath(url) )
 
         return(
@@ -49,15 +49,16 @@ export function Home () {
         )
     }
 
-    const Columns = data.map( (book, key) => {
+    const Columns = data.map( (movie, key) => {
         return(
             <Col md="3" key={key} className='my-3'>
-                <Card className='book-card'>
-                    <Image path={book.Cover}/>
+                <Card className='movie-card'>
+                    <Image path={movie.Image}/>
                     <Card.Body>
-                        <Card.Title>{book.Title}</Card.Title>
+                        <Card.Title>{movie.Title}</Card.Title>
+                        <h6>{movie.Genre}</h6>
                     </Card.Body>
-                    <a href={"/detail/"+book.id} className='card-link'></a>
+                    <a href={"/detail/"+movie.id} className='card-link'></a>
                 </Card>
             </Col>
         )
