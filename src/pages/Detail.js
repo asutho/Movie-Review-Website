@@ -52,7 +52,7 @@ export function Detail( props ) {
     //reviews collection
     const ReviewCollection = movieReviews.map((item) => {
         return (
-            <Col md="3">
+            <Col md="8" offset className='Review'>
                 <Card>
                     <Card.Title>
                         <h5>{item.title}</h5>
@@ -109,14 +109,12 @@ export function Detail( props ) {
             <Row className='my-3'>
                 <Col md="6">
                 <Image path ={movieData.Image}></Image><br/>
-                <h2>{movieData.Title}</h2>
-                    <h4>{movieData.Director}</h4>
-                    <h5>{movieData.Producer}</h5>
+                    <h2>{movieData.Title}</h2>
                     <h5>{movieData.Genre}</h5>
-                    <h5></h5>
-                    
-                    <p>{movieData.Synopsis}</p>
-                    <p>Actor List: {movieData.Actors}</p>
+                    <h4>Director: {movieData.Director}</h4>
+                    <h5>Producer: {movieData.Producer}</h5>
+                    <p>Synopsis:<br/>{movieData.Synopsis}</p>
+                    <p>Starring: {movieData.Actors}</p>
                     <a href={movieData.Link}>View the IMDB page for {movieData.Title} here</a>
                 </Col>
                 <Col md="5" className='my-3'>
