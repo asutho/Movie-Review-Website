@@ -5,6 +5,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore'
 import { getStorage } from "firebase/storage"
 import { useState } from 'react';
+import React from 'react';
+import CardList from './pages/Home';
 
 
 import './App.css';
@@ -43,7 +45,6 @@ const AuthNavRoutes = [
   { name: "Home", goto: "/" },
   { name: "About", goto: "/about" },
   { name: "Contact", goto: "/contact" },
-  { name: "Profile", goto: "/profile" },
   { name: "Sign out", goto: "/signout" },
   { name: "Detail", goto: "/detail"}
 ]
@@ -87,6 +88,21 @@ function App() {
       </FBAuthContext.Provider>
     </div>
   );
+
+    return (
+      <div className="App">
+        <h1>Card Search App</h1>
+        <CardList cards={cards} />
+      </div>
+    );
 }
+
+const cards = [
+  { title: 'Card 1', content: 'Content for Card 1' },
+  { title: 'Card 2', content: 'Content for Card 2' },
+  // Add more cards here
+];
+
+
 
 export default App;

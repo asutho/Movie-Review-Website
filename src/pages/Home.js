@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import CardComponent from 'react-bootstrap/Card';
 
 import { useContext, useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
@@ -12,6 +13,34 @@ import { FBDbContext } from '../contexts/FBDbContext';
 import { FBStorageContext } from '../contexts/FBStorageContext'
 
 import '../Styles/Home.css'
+
+
+const CardList = ({ Columns }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredCards = Columns.filter((card) =>
+    card.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search cards"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <div>
+        {filteredCards.map((card, index) => (
+          <CardComponent key={index} title={card.title} content={card.content} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default CardList;
+
 
 export function Home () {
     const[ data, setData ] = useState([])
@@ -52,7 +81,7 @@ export function Home () {
     const Columns = data.map( (movie, key) => {
         return(
             <Col md="3" key={key} className='my-3'>
-                <Card className='movie-card'>
+                <Card className='movie-card' border='black' style={{background: "rgb(200, 200, 200)"}}>
                     <Image path={movie.Image}/>
                     <Card.Body>
                         <Card.Title>{movie.Title}</Card.Title>

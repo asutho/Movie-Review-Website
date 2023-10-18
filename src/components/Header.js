@@ -4,10 +4,10 @@ import { Navigation } from "./Navigation"
 
 export function Header( props ) {
     return (
-        <Navbar bg='dark' variant='dark' expand='lg'>
+        <Navbar bg='black' variant='dark' expand='lg'>
             <Container>
                 <Navbar.Brand>
-                    Hello Website
+                    MOVIE CLUB
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="main-nav"/>
                 <Navbar.Collapse id="main-nav">

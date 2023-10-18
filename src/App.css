@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: ;
 }
 
 .App-logo {
@@ -14,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #062e7e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,6 +38,12 @@
   }
 }
 
-.one {
-  background-color: aqua;
+.test {
+  background-color: blue;
+}
+
+.movie-card {
+  background-color: grey;
+  color: black;
+  font-size: xx-small;
 }
