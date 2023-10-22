@@ -4,10 +4,16 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 
+
+
 import { useState, useEffect, useContext } from "react"
 import { FBAuthContext } from "../contexts/FBAuthContext"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, getAuth, signInWithRedirect, GoogleAuthProvider, getRedirectResult } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
+import { firebaseConfig } from "../config/Config"
+import { initializeApp } from 'firebase/app';
+import React from 'react'
+
 
 export function Signin ( props ) {
     const [ email, setEmail ] = useState("")
@@ -28,7 +34,7 @@ export function Signin ( props ) {
     }, [email] )
 
     useEffect( () => {
-        if( password.length > 7 ) {
+        if( password.length > 7) {
             setValidPassword(true)
         }
         else {
@@ -48,6 +54,9 @@ export function Signin ( props ) {
             console.log( error.code, error.message )
         })
     }
+
+
+
 
     return (
         <Container fluid className="test">
@@ -85,6 +94,11 @@ export function Signin ( props ) {
                             Submit
                         </Button>
                     </Form>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button class="social-signin google" id="login">Login with Google</Button>    
                 </Col>
             </Row>
         </Container>

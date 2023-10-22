@@ -46,7 +46,8 @@ export function ReviewForm(props) {
         <Form.Label>You've given this movie {stars} stars</Form.Label>
         <Form.Range name="stars" step="0.5" min="1" max="5" value={stars} onChange={ (evt) => setStars(evt.target.value)}/>
       </Form.Group>
-      <Button type="submit" variant="primary" disabled={ (submitted) ? true : false }>Submit Rating</Button>
+      <Button type="submit" className="button" disabled={ (submitted) ? true : false }>Submit Review</Button> 
+      
       <SubmitAlert show={ submitted } />
     </Form>
   )
@@ -55,3 +56,5 @@ export function ReviewForm(props) {
         return null
     }
 }
+
+// variant="outline-dark"

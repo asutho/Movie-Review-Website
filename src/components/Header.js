@@ -4,7 +4,7 @@ import { Navigation } from "./Navigation"
 
 export function Header( props ) {
     return (
-        <Navbar bg='black' variant='dark' expand='lg'>
+        <Navbar className="navbar" variant='dark' expand='lg'>
             <Container>
                 <Navbar.Brand>
                     MOVIE CLUB

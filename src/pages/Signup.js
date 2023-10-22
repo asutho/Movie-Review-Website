@@ -25,6 +25,8 @@ export function Signup ( props ) {
     const navigate = useNavigate(  )
 
     const allowedChars = "abcdefghijklmnopqrstuvwxyz1234567890_-"
+    const passwordChars = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
     //timer varaible
     let timer 
     //function to check if username exists in Firebase
@@ -81,7 +83,7 @@ export function Signup ( props ) {
     }, [email] )
 
     useEffect( () => {
-        if( password.length > 7 ) {
+        if( password.length > 8 && /[a-zA-Z]/.test(password) && /\d/.test(password) ) {
             setValidPassword(true)
         }
         else {
@@ -137,6 +139,7 @@ export function Signup ( props ) {
                             onChange={ (evt) => setEmail(evt.target.value) }
                             value={email}
                             />
+                            <Form.Control.Feedback>Looks good</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Password</Form.Label>

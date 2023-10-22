@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: ;
 }
 
 .App-logo {
@@ -15,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #062e7e;
+  background-color:#062e7e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,11 +38,46 @@
 }
 
 .test {
-  background-color: blue;
+
 }
 
 .movie-card {
   background-color: grey;
   color: black;
   font-size: xx-small;
+}
+
+.intro {
+  display: inline;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 40px;
+  margin-left: 80px;
+  padding: 70px;
+  position: relative;
+  top: 100%;
+  width: 100%;
+  color: rgb(50, 50, 100);
+}
+
+.movie-card {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
+  background-color: black;
+
+}
+
+.navbar {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(50, 50, 100);
+  color: black;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+.button {
+  background-color: rgb(50, 50, 100) !important;
 }

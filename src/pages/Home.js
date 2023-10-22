@@ -42,6 +42,7 @@ const CardList = ({ Columns }) => {
 export default CardList;
 
 
+
 export function Home () {
     const[ data, setData ] = useState([])
 
@@ -81,7 +82,7 @@ export function Home () {
     const Columns = data.map( (movie, key) => {
         return(
             <Col md="3" key={key} className='my-3'>
-                <Card className='movie-card' border='black' style={{background: "rgb(200, 200, 200)"}}>
+                <Card className='movie-card' style={{background: "rgb(50, 50, 80)", color: "antiquewhite"}} >
                     <Image path={movie.Image}/>
                     <Card.Body>
                         <Card.Title>{movie.Title}</Card.Title>
@@ -92,8 +93,15 @@ export function Home () {
             </Col>
         )
     })
+
     return (
         <Container>
+            <Row className='intro'>
+                <p>Welcome to MOVIE CLUB<br/><br/>We have a collection of over 19 movies for you to browse</p>
+            </Row>
+            <Row>
+                
+            </Row>
             <Row>
                 {Columns}
             </Row>

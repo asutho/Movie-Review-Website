@@ -46,7 +46,7 @@ const AuthNavRoutes = [
   { name: "About", goto: "/about" },
   { name: "Contact", goto: "/contact" },
   { name: "Sign out", goto: "/signout" },
-  { name: "Detail", goto: "/detail"}
+
 ]
 
 
