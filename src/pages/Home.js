@@ -30,10 +30,14 @@ const CardList = ({ Columns }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <div>
-        {filteredCards.map((card, index) => (
-          <CardComponent key={index} title={card.title} content={card.content} />
-        ))}
+    <div>
+        {searchTerm.length === 0
+          ? Columns.map((card, index) => (
+              <CardComponent key={index} title={card.Titleitle} content={card.content} />
+            ))
+          : filteredCards.map((card, index) => (
+              <CardComponent key={index} title={card.Title} content={card.content} />
+            ))}
       </div>
     </div>
   );
@@ -100,7 +104,6 @@ export function Home () {
                 <p>Welcome to MOVIE CLUB<br/><br/>We have a collection of over 19 movies for you to browse</p>
             </Row>
             <Row>
-                
             </Row>
             <Row>
                 {Columns}

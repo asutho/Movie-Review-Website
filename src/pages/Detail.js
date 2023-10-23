@@ -106,8 +106,8 @@ export function Detail( props ) {
     if( movieData) {
     return(
         <Container>
-            <Row className='my-3'>
-                <Col md="6">
+            <Row >
+                <Col className='my-3' md="5">
                 <Image path ={movieData.Image}></Image><br/>
                     <h2>{movieData.Title}</h2>
                     <h5>{movieData.Genre}</h5>
@@ -117,7 +117,8 @@ export function Detail( props ) {
                     <p>Starring: {movieData.Actors}</p>
                     <a href={movieData.Link}>View the IMDB page for {movieData.Title} here</a>
                 </Col>
-                <Col md="5" className='my-3'>
+                <Col className="centre" md="7">
+                    <br/>
                     <ReviewForm user={auth} handler={ReviewHandler}/>
                     <br/>
                     {ReviewCollection}

@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 
 
 export function ReviewForm(props) {
-    const[ stars, setStars ] = useState(5)
+    const[ stars, setStars ] = useState("")
     const[ submitted, setSubmitted] = useState(false)
 
     const SubmitHandler = ( event ) => {
@@ -42,11 +42,11 @@ export function ReviewForm(props) {
         <Form.Label>Review Content</Form.Label>
         <Form.Control as="textarea" rows={3} name="body"/>
       </Form.Group>
-      <Form.Group>
+      <Form.Group className="centre"> 
         <Form.Label>You've given this movie {stars} stars</Form.Label>
-        <Form.Range name="stars" step="0.5" min="1" max="5" value={stars} onChange={ (evt) => setStars(evt.target.value)}/>
+        <ReactStars count={5} size={60} half={true} value={0} onChange={(newRating) => setStars(newRating)}/>
       </Form.Group>
-      <Button type="submit" className="button" disabled={ (submitted) ? true : false }>Submit Review</Button> 
+      <Button  type="submit" className="button" disabled={ (submitted) ? true : false }>Submit Review</Button> 
       
       <SubmitAlert show={ submitted } />
     </Form>

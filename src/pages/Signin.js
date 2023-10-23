@@ -55,7 +55,16 @@ export function Signin ( props ) {
         })
     }
 
-
+    const SignInWithGoogle = async () => {
+        const auth = getAuth(); // Get the Firebase Auth instance
+        const provider = new GoogleAuthProvider(); // Create a Google Auth provider
+    
+        try {
+          await signInWithRedirect(auth, provider); // Redirect to Google Sign-In page
+        } catch (error) {
+          console.error('Error signing in with Google:', error);
+        }
+      };
 
 
     return (
@@ -98,7 +107,7 @@ export function Signin ( props ) {
             </Row>
             <Row>
                 <Col>
-                    <Button class="social-signin google" id="login">Login with Google</Button>    
+                    <Button class="social-signin google" id="login" onClick={SignInWithGoogle}>Login with Google</Button>    
                 </Col>
             </Row>
         </Container>
