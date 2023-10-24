@@ -17,35 +17,7 @@ import '../Styles/Home.css'
 
 const CardList = ({ Columns }) => {
   const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredCards = Columns.filter((card) =>
-    card.Title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search cards"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-    <div>
-        {searchTerm.length === 0
-          ? Columns.map((card, index) => (
-              <CardComponent key={index} title={card.Title} content={card.content} />
-            ))
-          : filteredCards.map((card, index) => (
-              <CardComponent key={index} title={card.Title} content={card.content} />
-            ))}
-      </div>
-    </div>
-  );
-};
+}
 
 export default CardList;
 
