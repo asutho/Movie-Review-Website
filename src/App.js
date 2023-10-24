@@ -12,7 +12,6 @@ import CardList from './pages/Home';
 import './App.css';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
-import { Contact } from './pages/Contact';
 import { Signin } from './pages/Signin';
 import { Signup } from './pages/Signup';
 import { SignOut } from './pages/Signout';
@@ -36,7 +35,6 @@ const FirebaseStorage = getStorage(FirebaseApp)
 const NavRoutes = [
   { name: "Home", goto: "/" },
   { name: "About", goto: "/about" },
-  { name: "Contact", goto: "/contact" },
   { name: "Sign in", goto: "/signin" },
   { name: "Sign up", goto: "/signup" },
 ]
@@ -44,7 +42,6 @@ const NavRoutes = [
 const AuthNavRoutes = [
   { name: "Home", goto: "/" },
   { name: "About", goto: "/about" },
-  { name: "Contact", goto: "/contact" },
   { name: "Sign out", goto: "/signout" },
 
 ]
@@ -77,7 +74,6 @@ function App() {
         <Routes>
           <Route path="/" element={ <Home/> } />
           <Route path="/about" element={ <About/> } />
-          <Route path="/contact" element={ <Contact/> } />
           <Route path="/signin" element={ <Signin/> } />
           <Route path="/signup" element={ <Signup/> } /> 
           <Route path="/signout" element={ <SignOut/> } />  
