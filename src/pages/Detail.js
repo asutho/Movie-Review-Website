@@ -107,15 +107,15 @@ export function Detail( props ) {
     return(
         <Container>
             <Row >
-                <Col className='my-3' md="5">
-                <Image path ={movieData.Image}></Image><br/>
+                <Col className='my-3' md="5"><br/>
+                <Image path ={movieData.Image}></Image><br/><br/>
                     <h2>{movieData.Title}</h2>
-                    <h5>{movieData.Genre}</h5>
+                    <h5>{movieData.Genre}</h5><br/>
                     <h4>Director: {movieData.Director}</h4>
-                    <h5>Producer: {movieData.Producer}</h5>
-                    <p>Synopsis:<br/>{movieData.Synopsis}</p>
-                    <p>Starring: {movieData.Actors}</p>
-                    <a href={movieData.Link}>View the IMDB page for {movieData.Title} here</a>
+                    <h5>Producer: {movieData.Producer}</h5><br/>
+                    <p>Synopsis:<br/>{movieData.Synopsis}</p><br/>
+                    <p>Starring: {movieData.Actors}</p><br/>
+                    <a href={movieData.Link}>View the IMDB page for {movieData.Title} here</a><br/>
                 </Col>
                 <Col className="centre" md="7">
                     <br/>

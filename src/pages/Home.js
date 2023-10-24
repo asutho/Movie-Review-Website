@@ -18,8 +18,12 @@ import '../Styles/Home.css'
 const CardList = ({ Columns }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const filteredCards = Columns.filter((card) =>
-    card.title.toLowerCase().includes(searchTerm.toLowerCase())
+    card.Title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -28,12 +32,12 @@ const CardList = ({ Columns }) => {
         type="text"
         placeholder="Search cards"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearch}
       />
     <div>
         {searchTerm.length === 0
           ? Columns.map((card, index) => (
-              <CardComponent key={index} title={card.Titleitle} content={card.content} />
+              <CardComponent key={index} title={card.Title} content={card.content} />
             ))
           : filteredCards.map((card, index) => (
               <CardComponent key={index} title={card.Title} content={card.content} />
@@ -57,7 +61,7 @@ export function Home () {
         //get data from Firebase collections called 'Movies'
         const querySnapshot = await getDocs(collection(FBDb, "Movies"))
         //an arrary to store all of the movies from Firebase
-        let movies = []
+        let movies = [];
         querySnapshot.forEach( (doc) => {
             let movie = doc.data()
             movie.id = doc.id
@@ -69,9 +73,9 @@ export function Home () {
     }
     useEffect( () => {
         if( data.length === 0 ) {
-            getData()
+            getData();
         }
-    })
+    }, []);
 
     const Image = ( props ) => {
         const [imgPath,setImgPath] = useState()
@@ -101,9 +105,8 @@ export function Home () {
     return (
         <Container>
             <Row className='intro'>
-                <p>Welcome to MOVIE CLUB<br/><br/>We have a collection of over 19 movies for you to browse</p>
-            </Row>
-            <Row>
+                <h1>Welcome to <b>MOVIE CLUB</b></h1>
+                <p><br/><br/>We have a collection of over 19 movies for you to browse</p>
             </Row>
             <Row>
                 {Columns}
